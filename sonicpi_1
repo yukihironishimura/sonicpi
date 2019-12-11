@@ -1,0 +1,51 @@
+# Coded by otonotrix
+noten = :e3
+
+live_loop :syn do
+  stop
+  with_fx :flanger, mix: 0.7 do |x|
+    synth :mod_sine, note: noten + 12, pan: -0.3
+    synth :mod_pulse,note: noten + 31, pulse_width: rrand(0.1,0.99),pan: 0.3
+    control x, mix: 0.7, delay: 5
+    sleep 2
+  end
+end
+
+live_loop :hat do
+  am = ( ring 2, 1, 1, 1 ).tick
+  sample :drum_cymbal_closed, amp: am, pan: -0.3
+  sleep 0.125
+end
+
+
+live_loop :db1 do
+  sample :bd_haus, amp: 2
+  sleep 0.5
+end
+
+live_loop :db2 do
+  sl = [0.5,0.25,0.125,1].choose
+  sample :bd_haus, amp: 2
+  sleep sl
+end
+
+live_loop :snere do
+  ##| stop
+  sync :db1
+  sample :sn_dub, amp: 2
+  sleep 0.5
+end
+
+with_fx :echo, decay: 0.06, mix: 0.5 do
+  live_loop :sc do
+    use_random_seed 50
+    
+    notes = (scale noten, :minor_pentatonic, num_octaves: 3)
+    sn = synth :prophet, amp: 1 , sustain: 2
+    16.times do
+      control sn ,note: notes.choose, pan: rrand(-0.7,0.7)
+      sleep 0.125
+    end
+  end
+end
+
