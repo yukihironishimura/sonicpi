@@ -1,0 +1,53 @@
+# Coded by otonotrix
+
+live_loop :fade do
+  ##| stop
+  sample :ambi_lunar_land, rate: -1, beat_stretch: 4, amp: 3
+  sleep 8
+end
+
+live_loop :loo do
+  
+  sample :loop_industrial, beat_stretch: 2, rate: -1,　amp: 0.5
+  sleep 0.5
+  
+end
+
+live_loop :luna do
+  with_fx :gverb, mix: 0.5 ,amp: 0.5 do
+    with_fx :echo, phase: 0.5  do
+      sn = sample :ambi_haunted_hum,rate: 1
+      rt = (ring 0.1, 0.3, 0.7, 0.5, 1, 5 )
+      8.times do
+        control sn , amp: rt.tick
+        sleep 0.5
+      end
+    end
+  end
+  
+end
+
+live_loop :bas do
+  
+  sample :bd_mehackit, amp: 1.8
+  sleep 1
+  
+end
+
+live_loop :did do
+  sn =  synth :cnoise, sustain: 1, amp: 1.3
+  sleep 0.5
+  control sn, cutoff: 50, cutoff_slide: 0.1
+  sleep 8
+  
+end
+
+live_loop :do do
+  count = 0
+  8.times do
+    bass = synth :tb303, amp: 0.5, note: 24 + count
+    count += 1
+    sleep 0.5
+  end
+end
+
