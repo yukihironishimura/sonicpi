@@ -1,0 +1,49 @@
+# Coded by otonotrix
+
+live_loop :gg do
+  with_fx :gverb, room: 4 do
+    with_fx :bitcrusher, sample_rate: 1000 do
+      sample :ambi_glass_rub, rate: 10, beat_stretch: 0.5
+      sleep 1
+    end
+  end
+end
+
+live_loop :aa do
+  sample :loop_mehackit1, rate: -0.1
+  sleep 1
+end
+
+live_loop :hh do
+  sample :bass_thick_c
+  sleep 1
+end
+
+live_loop :yy do
+  sample :bd_zome, amp: 2
+  sample :glitch_perc4, amp: 2
+  sleep 1
+end
+
+live_loop :kk do
+  sample :elec_flip, amp: 1.5
+  sleep 0.5
+end
+
+live_loop :bb do
+  ##| stop
+  sample :loop_mika, beat_stretch: 3, pan: -0.6,amp: 0.7
+  sample :loop_mika, beat_stretch: 3.15, pan: 0.6, amp: 0.7
+  sleep 3
+end
+
+live_loop :jj do
+  with_fx :reverb, room: 1 ,mix: 0.8 do
+    with_fx :echo, phase: 0.5, mix: 0.5 do
+      with_fx :slicer ,phase: 0.25, wave: 1, amp: 2 do
+        sample :misc_crow, rate: -5, beat_stretch: 10
+        sleep 5
+      end
+    end
+  end
+end
