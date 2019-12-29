@@ -1,0 +1,72 @@
+
+bm = 18
+##| -> 180 -> 90 ...
+
+live_loop :gar do
+  use_bpm bm
+  tick
+  with_fx :reverb, room: 0.9 do
+    with_fx :slicer, phase: 1 do
+      with_fx :distortion, distort: 0.9 ,amp: 0.3 do
+        sample :loop_garzul,rate: -1, amp: 10,attack: 0.01,sustain: 3
+      end
+    end
+  end
+  
+  sleep 6
+end
+
+
+live_loop :bd do
+  use_bpm bm
+  nt1 =[1.0,1.0,0.5,0.5,0.5,0.5,0.5,0.5,1.0]
+  nt2 =[1,1,1,1,1,1]
+  if one_in 1
+    
+    nt1.each do |nt|
+      sample  :bd_tek, amp: 2
+      sleep nt
+    end
+    
+  else
+    nt2.each do |nt|
+      
+      sample  :bd_tek, amp: 2
+      sleep nt
+    end
+    
+  end
+  
+end
+
+live_loop :snare do
+  ##| stop
+  sync :bd
+  use_bpm bm
+  6.times do
+    sleep 1
+    sample :drum_snare_hard, amp: 1.5, rate: 1, sustain: 0.3
+    sleep 1
+  end
+end
+
+
+live_loop :dr do
+  use_bpm bm
+  with_fx :reverb, room: 1.0 do
+    sample :ambi_drone, amp: 0.8, beat_stretch: 6
+  end
+  
+  sleep 6
+end
+
+live_loop :tr do
+  
+  tria = synth :tri
+  control tria,amp: 0.5,cutoff_slide: 4, cutoff: 70
+  sleep 4
+end
+
+
+
+
